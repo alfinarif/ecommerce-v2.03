@@ -1,0 +1,90 @@
+<div class="container quickView-container">
+	<div class="quickView-content">
+		<div class="row">
+			<div class="col-lg-7 col-md-6">
+				<div class="row">
+					<div class="product-left">
+						<a href="#one" class="carousel-dot active">
+							<img src="{{quickview_item.image.url}}">
+						</a>
+					</div>
+					<div class="product-right">
+						<div class="owl-carousel owl-theme owl-nav-inside owl-light mb-0" data-toggle="owl" data-owl-options='{
+	                        "dots": false,
+	                        "nav": false, 
+	                        "URLhashListener": true,
+	                        "responsive": {
+	                            "900": {
+	                                "nav": true,
+	                                "dots": true
+	                            }
+	                        }
+	                    }'>
+							<div class="intro-slide" data-hash="one">
+	                            <img src="{{quickview_item.image.url}}" alt="Image Desc">
+	                            <a href="https://www.portotheme.com/html/molla/popup/popup/fullscreen.html" class="btn-fullscreen">
+                                    <i class="icon-arrows"></i>
+                                </a>
+		                    </div><!-- End .intro-slide -->
+
+		                    <div class="intro-slide" data-hash="two">
+	                            <img src="../../../../www.portotheme.com/html/molla/popup/assets/images/popup/quickView/2.html" alt="Image Desc">
+	                            <a href="https://www.portotheme.com/html/molla/popup/popup/fullscreen.html" class="btn-fullscreen">
+                                    <i class="icon-arrows"></i>
+                                </a>
+		                    </div><!-- End .intro-slide -->
+
+		                    <div class="intro-slide" data-hash="three">
+	                            <img src="../../../../www.portotheme.com/html/molla/popup/assets/images/popup/quickView/3.html" alt="Image Desc">
+	                            <a href="https://www.portotheme.com/html/molla/popup/popup/fullscreen.html" class="btn-fullscreen">
+                                    <i class="icon-arrows"></i>
+                                </a>
+		                    </div><!-- End .intro-slide -->
+
+		                    <div class="intro-slide" data-hash="four">
+	                            <img src="../../../../www.portotheme.com/html/molla/popup/assets/images/popup/quickView/4.html" alt="Image Desc">
+	                            <a href="https://www.portotheme.com/html/molla/popup/popup/fullscreen.html" class="btn-fullscreen">
+                                    <i class="icon-arrows"></i>
+                                </a>
+		                    </div><!-- End .intro-slide -->
+		                </div>
+					</div>
+                </div>
+			</div>
+			<div class="col-lg-5 col-md-6">
+				<h2 class="product-title">{{quickview_item.name}}</h2>
+				<h3 class="product-price">${{quickview_item.price}}</h3>
+
+
+
+                <p class="product-txt">{{quickview_item.preview_des}}</p>
+
+
+
+                <div class="product-details-action">
+                    <div class="details-action-wrapper">
+                        <a href="{% url 'add_to_wishlist' pk=quickview_item.pk %}" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                    </div><!-- End .details-action-wrapper -->
+                    <a href="{% url 'add_to_cart' pk=quickview_item.pk %}" class="btn-product btn-cart"><span>add to cart</span></a>
+                </div>
+
+                <div class="product-details-footer">
+                    <div class="product-cat">
+                        <span>Category:</span>
+						<span>{{quickview_item.category}}</span>
+                    </div><!-- End .product-cat -->
+
+                    <div class="social-icons social-icons-sm">
+                        <span class="social-label">Share:</span>
+                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                        <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
