@@ -14,6 +14,9 @@ from decimal import Decimal
 # for current time
 from django.utils import timezone
 
+# notification models
+from notification.models import Notification
+
 
 
 @login_required
@@ -26,10 +29,20 @@ def add_to_cart(request, pk):
         if order.orderitems.filter(item=item).exists():
             order_item[0].quantity += 1
             order_item[0].save()
+            #====== notification function ======
+            sms = f"{item} Quantity has been updated"
+            notify = Notification(item=item, user=request.user, notification_type=1,text_preview=sms)
+            notify.save()
+            #====== notification function ======
             messages.info(request, 'This item quantity was updated!')
             return redirect('index')
         else:
             order.orderitems.add(order_item[0])
+            #====== notification function ======
+            sms = f"{item} added to your cart!"
+            notify = Notification(item=item, user=request.user, notification_type=1,text_preview=sms)
+            notify.save()
+            #====== notification function ======
             messages.info(request, 'This item was added to your cart!')
             return redirect('index')
     else:

@@ -3,6 +3,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
+    parent = models.ForeignKey('self', related_name='children', on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='category')
     created = models.DateTimeField(auto_now_add=True)

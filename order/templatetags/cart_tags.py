@@ -3,6 +3,8 @@ from order.models import Order, Cart, Wishlist
 from store.models import Category
 from django.template import RequestContext
 
+from notification.models import Notification
+
 register = template.Library()
 
 
@@ -45,5 +47,22 @@ def cart_view(user):
 @register.filter
 def category(user):
     if user.is_authenticated:
-        cat = Category.objects.all()
+        cat = Category.objects.filter(parent=None)
         return cat
+
+@register.filter
+def notifications(user):
+    if user.is_authenticated:
+        notify = Notification.objects.filter(user=user).order_by('-date')
+        return notify
+    else:
+        return None
+
+
+@register.filter
+def notify_count(user):
+    if user.is_authenticated:
+        notify = Notification.objects.filter(user=user, is_seen=False).count()
+        return notify
+    else:
+        return None

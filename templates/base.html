@@ -166,11 +166,11 @@
 
 
                         <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <a href="{% url 'is_seen' %}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <div class="icon">
                                     <i class="las la-bell"></i>
                                     {% if request.user.is_authenticated %}
-                                    <span class="cart-count">{{ request.user.id | notific_count }}</span>
+                                    <span class="cart-count">{{ request.user|notify_count }}</span>
                                     {% else %}
                                     <span class="cart-count">0</span>
                                     {% endif %}
@@ -181,14 +181,14 @@
                             <div class="dropdown-menu dropdown-menu-right">
 
                                 {% if request.user.is_authenticated %}
-                                {% if request.user.id|notific_view %}
-                                {% for notific in request.user.id|notific_view %}
+                                {% if request.user|notifications %}
+                                {% for notific in request.user|notifications %}
                                 <div class="dropdown-cart-products">
                                     <div class="product">
 
-                                        <span>{{ notific.message }}</span><hr>
+                                        <span>{{ notific.text_preview }}</span><hr>
 
-                                        <a href="{% url 'notific' %}" class="btn-remove" title="Remove Notification"><i class="icon-close"></i></a>
+                                        <a href="{% url 'is_seen' %}" class="btn-remove" title="Remove Notification"><i class="icon-close"></i></a>
                                     </div><!-- End .product -->
                                 </div><!-- End .cart-product -->
 
@@ -198,16 +198,6 @@
 
                             </div><!-- End .dropdown-menu -->
                         </div><!-- End .cart-dropdown -->
-
-
-
-
-
-
-
-
-
-
 
 
                         {% if request.user.is_authenticated %}
@@ -256,7 +246,18 @@
                                 <nav class="side-nav">
                                     <ul class="menu-vertical sf-arrows">
                                         {% for cat in request.user|category %}
-                                        <li class="item-lead"><a href="{% url 'category' pk=cat.pk %}">{{ cat.name }}</a></li>
+                                        {% if not cat.children.all %}
+                                            <li class="item-lead"><a href="{% url 'category' pk=cat.pk %}">{{ cat.name }}</a></li>
+                                        {% else %}
+                                            <li>
+                                                <a href="{% url 'category' pk=cat.pk %}" class="sf-with-ul">{{ cat.name }}</a>
+                                                <ul>
+                                                    {% for subcategory in cat.children.all %}
+                                                    <li><a href="{% url 'category' pk=subcategory.pk %}">{{ subcategory.name }}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% endif %}
                                         {% endfor %}
                                     </ul><!-- End .menu-vertical -->
                                 </nav><!-- End .side-nav -->
